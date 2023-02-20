@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<div class="page-top" style="width: 100%; height: 20px; background-color: #f46b42;"></div>
+<!-- Static navbar -->
+<div th:replace="common/header :: navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h2 class="section-headline"><span>Frequently asked questions (FAQ)</span></h2>
+        </div>
+        <div class="col-4">
+            <img src="/image/logo.png" class="img-fluid"/>
+        </div>
+        <hr style="width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -10%;"/>
+    </div>
+
+    <img src="/image/wood.png" class="img-fluid" style="margin-top: -5%;"/>
+
+    <div class="row" sytle="margin-top: 10px;">
+        <div class="col-10 offset-2">
+            <h3>Shopping</h3>
+            <hr/>
+            <h4 class="question">Q: Is shopping at the campus store really my best bet?</h4>
+            <p>A:&nbsp;Yes! Your campus store works every angle to provide students with the best prices—from partnering with faculty to choose the most cost-efficient items—to offering used or rental books. Need to return or exchange a product? We make that easy for you.</p>
+            <h4 class="question">Q: Why shop the campus store vs. other online retailers?&nbsp;</h4>
+            <p>A: With everything you need in one place, shopping the campus store means less time spent searching. Bottom line: we guarantee that you have the right course materials.</p>
+            <h4 class="question">Q: How do I shop at the campus store for materials?</h4>
+            <p>A: In-store systems help you quickly find what you need with course materials arranged either by course, or alphabetically by author.
+            </p>
+            <h4 class="question">Q: What’s the difference between "Textbooks" vs. "Course Materials”?</h4>
+            <p>A: Course materials is a broader category that includes digital materials, and supplies like lab goggles. It's everything you need for a class.
+            <h3>Shipping&nbsp;</h3>
+            <h4 class="question">Q: When will I receive my order?</h4>
+            <p>A: On average, your order will be received in 7 - 10 working days. During August and January, delivery
+                time may take longer.&nbsp;</p>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: footer"/>
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

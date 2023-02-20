@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<div class="page-top" style="width: 100%; height: 20px; background-color: #f46b42;"></div>
+<!-- Static navbar -->
+<div th:replace="common/header :: navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h2 class="section-headline">
+                <h2 class="section-headline"><span th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Products'"></span></h2>
+            </h2>
+        </div>
+        <div class="col-4">
+            <img src="/image/logo.png" class="img-fluid"/>
+        </div>
+        <hr style="width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -10%;"/>
+    </div>
+
+    <img src="/image/wood.png" class="img-fluid" style="margin-top: -5%;"/>
+
+    <div class="row" style="margin-top: 60px;">
+        <div class="col-3">
+            <h3><label for="category">Category</label></h3>
+            <div class="list-group" id="category">
+                <a th:href="@{/productshelf(category='all')}" th:classappend="${activeAll}? 'active'" class="list-group-item list-group-item-action">All</a>
+                <a th:href="@{/searchByCategory(category='Management')}" th:classappend="${activeManagement}? 'active'" class="list-group-item list-group-item-action">Textbooks</a>
+                <a th:href="@{/searchByCategory(category='Fiction')}" th:classappend="${activeFiction}? 'active'" class="list-group-item list-group-item-action">Electronics</a>
+                <a th:href="@{/searchByCategory(category='Engineering')}" th:classappend="${activeEngineering}? 'active'" class="list-group-item list-group-item-action">Games</a>
+                <a th:href="@{/searchByCategory(category='Programming')}" th:classappend="${activeProgramming}? 'active'" class="list-group-item list-group-item-action">Clothing</a>
+                <a th:href="@{/searchByCategory(category='Arts &amp; Literature')}" th:classappend="${activeArtsLiterature}? 'active'" class="list-group-item list-group-item-action">School Supplies</a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div th:if="${emptyList}">
+                <h5 style="font-style: italic;">Oops, no result is found. Try something else or try again later.</h5>
+            </div>
+
+            <table border="0" id="productList" class="dataTable no-footer">
+                <thead><tr><th></th></tr></thead>
+                <tbody>
+                <tr class="product-item" data-th-each="product : ${productList}">
+                    <td>
+                        <div th:if="${product != null}">
+                            <div class="row" style="margin-bottom: 50px;">
+                                <div class="col-3">
+                                    <a th:href="@{/productDetail?id=}+${product.id}"><img class="img-fluid shelf-product" th:src="@{/productimage/}+${product.id}+'.png'"/></a>
+                                </div>
+                                <div class="col-9">
+                                    <a th:href="@{/productDetail?id=}+${product.id}"><h4 th:text="${product.productName}"></h4></a>
+                                    <span th:text="${product.manufacturingDate}"></span>
+                                    <p th:text="${product.size}"></p>
+                                    <a th:href="@{/productDetail?id=}+${product.id}"></a>
+                                    <br/>
+
+                                    <a th:href="@{/productDetail?id=}+${product.id}"><span style="font-size: x-large; color: #db3208;">$<span th:text="${#numbers.formatDecimal(product.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span></span></a>
+                                    <span style="text-decoration: line-through;">$<span th:text="${#numbers.formatDecimal(product.listPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
+
+                                    <p th:utext="${#strings.abbreviate(product.description, 500)}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: footer"/>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+<script>
+    $(document).ready(function() {
+        $('#productList').DataTable({
+            "lengthMenu": [ [5,10,15,20,-1], [5,10,15,20,"All"] ],
+            "ordering": false,
+            stateSave: true
+        });
+
+        $("#productList").on('page.dt', function() {
+            $('html, body').animate({
+                scrollTop: $('#productList').offset().top
+            }, 200);
+        });
+    });
+</script>
+</body>
+</html>
